@@ -1,15 +1,20 @@
 package index
 
 import dashboard.dashboard
+import heroDetail.heroDetail
+import heroes.getHeroes
 import heroes.heroes
 import kotlinext.js.require
 import kotlinext.js.requireAll
+import react.RProps
 import react.dom.a
+import react.dom.div
 import react.dom.nav
 import react.dom.render
 import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.switch
+import shared.Hero
 import kotlin.browser.document
 
 fun main(args: Array<String>) {
@@ -34,10 +39,18 @@ fun main(args: Array<String>) {
                 route("/", exact = true) {
                     dashboard()
                 }
-                route("/heroes", strict = true) {
+                route("/heroes", exact = true) {
                     heroes()
+                }
+                route<IdProps>("/heroes/:id") { props ->
+                    val hero = getHeroes().find { hero -> hero.id == +props.match.params.id}
+                    heroDetail(hero!!)
                 }
             }
         }
     }
+}
+
+interface IdProps : RProps {
+    var id: Int
 }

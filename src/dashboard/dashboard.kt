@@ -1,5 +1,6 @@
 package dashboard
 
+import heroes.getHeroes
 import kotlinext.js.requireAll
 import react.RBuilder
 import react.RComponent
@@ -18,9 +19,11 @@ class Dashboard : RComponent<RProps, RState>() {
         }
 
         div("grid grid-pad") {
-            a(classes = "col-1-4") {
-                div("module hero") {
-                    +"hi"
+            for(hero in getHeroes()) {
+                a(classes = "col-1-4") {
+                    div("module hero") {
+                        +hero.name
+                    }
                 }
             }
         }

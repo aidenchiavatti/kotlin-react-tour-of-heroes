@@ -34,18 +34,16 @@ class HeroDetail: RComponent<HeroDetail.Props, RState>() {
                     value = props.hero.name
                     onChangeFunction = {
                         val target = it.target as HTMLInputElement
-                        props.cFun(target.value)}
+                    }
                 }
             }
         }
     }
     interface Props: RProps {
         var hero: Hero
-        var cFun: (String) -> Unit
     }
 }
 
-fun RBuilder.heroDetail(hero: Hero, onClick: (String) -> Unit) = child(HeroDetail::class) {
+fun RBuilder.heroDetail(hero: Hero) = child(HeroDetail::class) {
     attrs.hero = hero
-    attrs.cFun = onClick
 }

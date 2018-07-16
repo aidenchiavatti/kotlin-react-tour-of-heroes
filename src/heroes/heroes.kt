@@ -13,11 +13,7 @@ import shared.Hero
 
 class Heroes: RComponent<RProps, Heroes.State>() {
     init {
-        state.heroes = arrayOf(
-                Hero(11, "Mr. Nice"),
-                Hero(12, "Narco"),
-                Hero(13, "Bombasto")
-        )
+        state.heroes = getHeroes()
     }
 
     override fun RBuilder.render() {
@@ -50,7 +46,7 @@ class Heroes: RComponent<RProps, Heroes.State>() {
 
 
         if(state.selectedHero != undefined) {
-            heroDetail(state.selectedHero, handleName)
+            heroDetail(state.selectedHero)
         }
     }
 
@@ -68,3 +64,11 @@ class Heroes: RComponent<RProps, Heroes.State>() {
 
 fun RBuilder.heroes() = child(Heroes::class) {}
 
+fun getHeroes(): Array<Hero> {
+    return arrayOf(
+            Hero(11, "Mr. Nice"),
+            Hero(12, "Narco"),
+            Hero(13, "Bombasto"),
+            Hero(14, "Windstorm")
+    )
+}
